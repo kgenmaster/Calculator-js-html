@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMC Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="app">
+        <input type="text" class="result" disabled id="result" placeholder="0">
+        <input type="text" class="operations" disabled id="operations">
+
+        <div class="buttonsection">
+            <button class="btn clear util">AC</button>
+            <button class="btn delete util">del</button>
+            <button class="btn util percent">%</button>
+            <button class="btn operators">/</button>
+            <button class="btn numbers">7</button>
+            <button class="btn numbers">8</button>
+            <button class="btn numbers">9</button>
+            <button class="btn operators">x</button>
+            <button class="btn numbers">4</button>
+            <button class="btn numbers">5</button>
+            <button class="btn numbers">6</button>
+            <button class="btn operators">-</button>
+            <button class="btn numbers">1</button>
+            <button class="btn numbers">2</button>
+            <button class="btn numbers">3</button>
+            <button class="btn operators">+</button>
+            <button class="btn numbers">0</button>
+            <button class="btn operators">.</button>
+            <button class="btn util equals">=</button>
+        </div>
+    </section>
+
+    <script defer>
+        const buttons = document.querySelectorAll('.btn');
+        const operationScreen = document.querySelector('.operations');
+        const resultScreen = document.querySelector('.result');
+
+        let currentInput = "";
+        let expression = "";
+
+        // Handle button clicks
+        buttons.forEach(button => {
+            button.addEventListener('click', e => {
+                const value = e.target.innerText;
+
+                // Handle number and operator input
+                if (value === 'x') {
+                    currentInput += "*";
+                    operationScreen.value = currentInput;
+                } else if (value === 'del') {
+                    // Delete last character
+                    currentInput = currentInput.slice(0, -1);
+                    operationScreen.value = currentInput;
+                } else if (value === 'AC') {
+                    // Clear all
+                    currentInput = "";
+                    expression = "";
+                    operationScreen.value = "";
+                    resultScreen.value = "";
+                } else if (value === '%') {
+                    // Handle percentage
+                    if (currentInput) {
+                        currentInput = (parseFloat(currentInput) / 100).toString();
+                        operationScreen.value = currentInput;
+                    }
+                } else if (value === '=') {
+                    try {
+                        expression = currentInput.replace(/x/g, "*"); // Replace 'x' with '*'
+                        const result = eval(expression);
+                        resultScreen.value = result;
+                        currentInput = result.toString();
+                    } catch (error) {
+                        resultScreen.value = "Syntax Error";
+                        currentInput = "";
+                    }
+                } else {
+                    // Handle number and operator buttons
+                    currentInput += value;
+                    operationScreen.value = currentInput;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

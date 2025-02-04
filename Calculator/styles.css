@@ -1,0 +1,108 @@
+:root {
+    --skin-color: rgb(36, 52, 65);
+    --primary-color: rgb(121, 134, 143);
+    --secondary-color: rgb(237, 128, 47);
+}
+* {
+    /* border: thin solid red; */
+    border: none;
+    box-sizing: border-box;
+    font-size: 24px;
+    font-family: arial;
+    color: rgb(71, 114, 70);
+}
+body {
+    display: flex;
+    background-color: cadetblue;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.app {
+    background-color: var(--skin-color);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.app * {
+    flex: 1;
+}
+.result , .operations {
+    display: block;
+    background-color: var(--skin-color);
+    width: 100%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.result {
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 1.2em;
+    font-weight: 500;
+    min-height: 3em;
+    background-color: rgba(57, 82, 102, 0.37);
+    margin-top: 5px;
+    border-radius: 20px;
+}
+.operations {
+    color: var(--primary-color);
+    min-height: 1em;
+    min-height: 1em;
+    margin: 10px 0;
+
+}
+.buttonsection {
+    display: grid;
+    grid-template: repeat(5, 70px) / repeat(4, 80px);
+    gap: 15px;
+    padding: 4px;
+}
+.btn {
+    border-radius: 16px;
+    border: none;
+    border-bottom: thick solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    color: var(--primary-color);
+    box-shadow: 0px -2px 5px rgba(107, 107, 107, 0.15);
+    transition: 10ms;
+}
+
+.btn:active {
+    border: thin solid var(--skin-color);
+}
+.operators {
+    color: var(--secondary-color);
+}
+.equals {
+    color: white;
+    background-color: var(--secondary-color);
+    grid-column: span 2;
+}
+
+
+
+@media screen and (max-width: 400px) {
+    .app {
+        width: 100%; /* Make the app more fluid on smaller screens */
+        padding: 10px;
+    }
+    .buttonsection {
+        grid-template: repeat(5, 60px) / repeat(4, 1fr);
+        gap: 10px;
+    }
+    .btn {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .result, .operations {
+        font-size: 1.1em; /* Adjust font size on medium screens */
+    }
+}
